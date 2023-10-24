@@ -1,0 +1,53 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Customer</li>
+  </ol>
+</nav>
+<div class="card">
+  <div class="header">
+    <!-- <h2 class="title">Customer</h2> -->
+  </div>
+  <div class="content">
+    <div *ngIf="feedback.length" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="customer" #editForm="ngForm" (ngSubmit)="save()">
+
+      <div class="form-group">
+        <label for="customer">Cliente</label>
+        <input [(ngModel)]="customer.customer" id="customer" name="customer" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="segmento">Segmento</label>
+        <br>
+        <select [(ngModel)]="customer.segmento" name="segmento" id="segmento">
+          <option *ngFor="let item of segmentoList" [value]="item.segmento">{{item.segmento}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="cac">CAC</label>
+        <input [(ngModel)]="customer.cac" id="cac" name="cac" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="ltv">LTV</label>
+        <input [(ngModel)]="customer.ltv" id="ltv" name="ltv" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="roas">ROAS</label>
+        <input [(ngModel)]="customer.roas" id="roas" name="roas" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="roi">ROI</label>
+        <input [(ngModel)]="customer.roi" id="roi" name="roi" class="form-control">
+      </div>
+
+
+      <button type="submit" class="btn btn-primary" [disabled]="!editForm.form.valid">Salvar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+    </form>
+  </div>
+</div>

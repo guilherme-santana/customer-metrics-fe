@@ -1,0 +1,64 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Customer</li>
+  </ol>
+</nav>
+<div class="card">
+  <div class="header">
+    <!-- <h2 class="title">Cliente</h2> -->
+  </div>
+  <div class="content">
+    <form #f="ngForm">
+
+      <div class="form-group">
+        <label for="customer">Cliente:</label>
+        <input [(ngModel)]="filter.customer" id="customer" name="customer" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="segmento">Segmento:</label>
+        <input [(ngModel)]="filter.segmento" id="segmento" name="segmento" class="form-control">
+      </div>
+      <br>
+      <button (click)="search()" [disabled]="!f?.valid" class="btn btn-primary">Buscar</button>
+      <a [routerLink]="['../customers', 'create' ]" class="btn btn-default ml-2">Novo</a>
+    </form>
+  </div>
+</div>
+<div class="card" *ngIf="customerList.length > 0">
+  <div *ngIf="feedback.length" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mt-2" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Cliente</th>
+          <th class="border-top-0" scope="col">Segmento</th>
+          <th class="border-top-0" scope="col">CAC</th>
+          <th class="border-top-0" scope="col">LTV</th>
+          <th class="border-top-0" scope="col">ROAS</th>
+          <th class="border-top-0" scope="col">ROI</th>
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of customerList" [class.active]="item === selectedCustomer">
+
+          <td>{{item.id}}</td>
+          <td>{{item.customer}}</td>
+          <td>{{item.segmento}}</td>
+          <td>{{item.cac}}</td>
+          <td>{{item.ltv}}</td>
+          <td>{{item.roas}}</td>
+          <td>{{item.roi}}</td>
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../customers', item.id ]" class="ti-pencil"></a>&nbsp;
+            <a [routerLink]="['../customers/details', item.id ]" class="ti-eye"></a>&nbsp;
+            <button (click)="delete(item)" class="ti-trash"></button>&nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

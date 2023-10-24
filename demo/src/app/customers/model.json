@@ -1,0 +1,37 @@
+{
+    "title": "Customer",
+    "entity": "Customer",
+    "api": {
+      "url": "http://localhost:8080/customer"
+    },
+    "filter": [
+      "customer",
+      "segmento"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "isId": true,
+        "type": "number",
+        "label": "Id",
+        "default": 0,
+        "control": "text"
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "label": "From"
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "label": "To"
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "control": "date",
+        "label": "Date"
+      }
+    ]
+}
